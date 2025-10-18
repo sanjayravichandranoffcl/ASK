@@ -1,58 +1,77 @@
- 
+# ASK
 # Aim
 Write a simple Python program for the modulation and demodulation of ASK and FSK.
 # Tools required
 # Program
- # ask
- import numpy as np
+```
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import butter, lfilter
-# Butterworth low-pass filter for demodulation
+
 def butter_lowpass_filter(data, cutoff, fs, order=5):
-  nyquist = 0.5 * fs
-  normal_cutoff = cutoff / nyquist
-  b, a = butter(order, normal_cutoff, btype='low', analog=False)
-  return lfilter(b, a, data)
-# Parameters
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return lfilter(b, a, data)
+
 fs = 1000
 f_carrier = 50
 bit_rate = 10
 T = 1
 t = np.linspace(0, T, int(fs * T), endpoint=False)
-# Message signal (binary data)
+
 bits = np.random.randint(0, 2, bit_rate)
 bit_duration = fs // bit_rate
 message_signal = np.repeat(bits, bit_duration)
-# Carrier signal
 carrier = np.sin(2 * np.pi * f_carrier * t)
-# ASK Modulation
 ask_signal = message_signal * carrier
-# ASK Demodulation
+
 demodulated = ask_signal * carrier
 filtered_signal = butter_lowpass_filter(demodulated, f_carrier, fs)
 decoded_bits = (filtered_signal[::bit_duration] > 0.25).astype(int)
-# Plotting
+
 plt.figure(figsize=(12, 8))
 plt.subplot(4, 1, 1)
-plt.plot(t, message_signal, label='Message Signal (Binary)', color='b')
+plt.plot(t, message_signal, color='b')
 plt.title('Message Signal')
 plt.grid(True)
+
 plt.subplot(4, 1, 2)
-plt.plot(t, carrier, label='Carrier Signal', color='g')
+plt.plot(t, carrier, color='g')
 plt.title('Carrier Signal')
 plt.grid(True)
+
 plt.subplot(4, 1, 3)
-plt.plot(t, ask_signal, label='ASK Modulated Signal', color='r')
+plt.plot(t, ask_signal, color='r')
 plt.title('ASK Modulated Signal')
 plt.grid(True)
+
 plt.subplot(4, 1, 4)
-plt.step(np.arange(len(decoded_bits)), decoded_bits, label='Decoded Bits', color='r',
-marker='x')
+plt.step(np.arange(len(decoded_bits)), decoded_bits, color='r', marker='x')
 plt.title('Decoded Bits')
 plt.tight_layout()
 plt.show()
- # fsk
- import numpy as np
+```
+```
+# Output Waveform
+```
+<img width="1190" height="790" alt="download" src="https://github.com/user-attachments/assets/b0d119f6-863d-412f-bd01-d1ffdf38dbd7" />
+
+# Results
+```
+Output Found and Waveform has been Generated
+```
+# Hardware experiment output waveform.
+
+# FSK
+##  Aim
+To write a Python program for the modulation and demodulation of FSK.
+## Tools required
+- Python: A versatile programming language used for scientific computing and signal processing.
+- NumPy: A powerful numerical library in Python for performing array-based operations and mathematical computations.
+## Program
+~~~
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import butter, lfilter
 
@@ -128,14 +147,11 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
- 
-# Output Waveform
- # ask:
-<img width="1442" height="773" alt="Screenshot 2025-10-04 151458" src="https://github.com/user-attachments/assets/711bc36d-d555-4cd0-b234-92f33c4e8ea0" />
-<img width="1372" height="264" alt="Screenshot 2025-10-04 151506" src="https://github.com/user-attachments/assets/3606b919-9fad-4a2f-8455-b7646fd1a5f7" />
- # fsk:
- <img width="1372" height="698" alt="Screenshot 2025-10-04 151952" src="https://github.com/user-attachments/assets/ac525579-a18a-488e-bccf-02022797532c" />
-<img width="1347" height="445" alt="Screenshot 2025-10-04 152003" src="https://github.com/user-attachments/assets/05cbf696-feb8-4ade-968a-8d6dbb9b1bbe" />
+~~~
+## Output Waveform
+![image](https://github.com/user-attachments/assets/92c8a307-a598-4914-becf-3f59f37d84ae)
 
-# Results
-Hence a simple Python program for the modulation and demodulation of ASK and FSK is written.
+## Results
+Thus the FSK(Frequency shift keying) is performed using Python.
+
+## Hardware experiment output waveform
